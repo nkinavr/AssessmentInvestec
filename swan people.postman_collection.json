@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "1c6a7892-66c0-4ef6-8c91-29215ffe8d1c",
+		"name": "swan people",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://swapi.dev/api/people/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"arrayResponse1 = response.results;\r",
+							"for (let i = 0; i < arrayResponse1.length; i++) {\r",
+							"      \r",
+							"if(arrayResponse1[i].name == \"R2-D2\" && arrayResponse1[i].skin_color == \"white, blue\"){\r",
+							"    console.log(\"found1 @ index = \" +  i);\r",
+							"    console.log(arrayResponse1[i]); \r",
+							"    \r",
+							"    pm.test(\"skin_color is white, blue\", () => {\r",
+							"        pm.expect(arrayResponse1[i].skin_color).to.eql(\"white, blue\")\r",
+							"        console.log(arrayResponse1[i].name +\"'s skin color is \" + arrayResponse1[i].skin_color);\r",
+							"    });\r",
+							"    break;\r",
+							"\r",
+							"}else{\r",
+							"    console.log(\"not found @ index = \" + i);\r",
+							"}\r",
+							"    \r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.dev/api/people/",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						"people",
+						""
+					]
+				},
+				"description": "Asserting that that R2-D2’s skin colour is white and blue.\r\n\r\n "
+			},
+			"response": []
+		}
+	]
+}
